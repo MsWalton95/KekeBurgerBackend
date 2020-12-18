@@ -1,47 +1,40 @@
 package com.revature.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.springframework.stereotype.Component;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.List;
 
 @Component
 @Entity
-@Getter @Setter @NoArgsConstructor @EqualsAndHashCode @ToString
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Cart implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="customer_id")
+	@Column(name="cart_id")
 	private int id;
-	
+
 	@OneToOne
-	@MapsId
-	@JoinColumn(name = "customer_id")
+    @JoinColumn(name="customer_id")
 	private Customer customer;
 	
-	@OneToMany(mappedBy="cart", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="cart", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Food> food;
 
-	public Cart(Customer customer, List<Food> food) {
-		super();
-		this.customer = customer;
-		this.food = food;
-	}
-	
 }

@@ -12,28 +12,31 @@ import javax.persistence.ManyToOne;
 
 import org.springframework.stereotype.Component;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Component
 @Entity
-@Getter @Setter @NoArgsConstructor @EqualsAndHashCode @ToString
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Address implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name="address_id")
-	private int id;
+	private int addressId;
 
 	@Column(name="address_1")
 	private String address1;
 	
 	@Column(name="address_2")
 	private String address2;
+	
+	@Column(name="city")
+	private String city;
 	
 	@Column(name="state", length=2)
 	private String state;
@@ -42,8 +45,7 @@ public class Address implements Serializable{
 	private int zipcode;
 
 	@ManyToOne
-	@JoinColumn(name="id")
+	@JoinColumn(name="customer_id")
 	private Customer customer;
-	
 	
 }

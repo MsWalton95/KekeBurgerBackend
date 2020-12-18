@@ -12,25 +12,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 import org.springframework.stereotype.Component;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Component
-@Getter @Setter @NoArgsConstructor @EqualsAndHashCode @ToString
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Customer implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id")
+	@Column(name="customer_id")
 	private int id;
 	
 	@Column(name="first_name", nullable=false, length=20)
@@ -43,22 +42,12 @@ public class Customer implements Serializable{
 	private String email;
 	
 	@Column(name="phone_number", nullable=false)
-	private int phoneNumber;
+	private long phoneNumber;
 	
-	@OneToMany(mappedBy="address", fetch=FetchType.LAZY, cascade=CascadeType.ALL)  
-	private List<String> address;
-	
-	@OneToOne(mappedBy = "customer", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@PrimaryKeyJoinColumn
-	private Cart cart;
+	@OneToMany(mappedBy="customer", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	private List<Address> address;
 
-	public Customer(String firstName, String lastName, String email, int phoneNumber, List<String> address) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-		this.address = address;
-	}
+	@OneToOne(mappedBy="customer",fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	private Cart cart;
 
 }
