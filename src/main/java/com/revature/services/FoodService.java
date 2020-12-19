@@ -1,52 +1,38 @@
 package com.revature.services;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.models.Food;
-import com.revature.repository.FoodRepository;
 
 @Service
 public class FoodService {
 
-	@Autowired
-	private FoodRepository repo;
+	private List<Food> foods = new ArrayList<Food>(Arrays.asList(
+			new Food(1, "MacBurger", 5.99, "Burger", 1500),
+			new Food(2, "MacShake", 3.99, "Shake", 1600)
+			));
 	
-	@Transactional
-	public List<Food> getAllFood(){
-		return repo.findAll();
+	public List<Food> getAllFoods(){
+		return foods;
 	}
 	
-	@Transactional
-	public List<Food> getByType(String type){
-		return repo.findByType(type);
+	public Food getFood(int id) {
+		return foods.get(id-1);
 	}
 	
-	@Transactional
-	public Food getByName(String name) {
-		return repo.findByName(name);
+	public void addFood(Food f) {
+		foods.add(f);
 	}
 	
-	@Transactional
-	public Food getById(int id) {
-		return repo.getOne(id);
+	public void updateFood(int id, Food f) {
+		foods.set(id-1, f);
 	}
 	
-	@Transactional
-	public boolean addFood(Food f) {
-		return repo.save(f) != null;
-	}
-	
-	@Transactional
-	public boolean updateFood(Food f) {
-		return repo.save(f) != null;
-	}
-	
-	@Transactional
-	public void deleteFood(int id) {
-		repo.deleteById(id);
+	public void removeFood(int id) {
+		foods.remove(id-1);
 	}
 }

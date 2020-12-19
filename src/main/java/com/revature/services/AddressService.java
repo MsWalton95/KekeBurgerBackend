@@ -1,41 +1,38 @@
 package com.revature.services;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 
 import com.revature.models.Address;
-import com.revature.repository.AddressRepository;
 
+@Service
 public class AddressService {
 	
-	@Autowired
-	private AddressRepository repo;
+	private List<Address> addresses = new ArrayList<>(Arrays.asList(
+			new Address(1,"1660 Peachtree St. NE", null, "Atlanta","GA", 30309),
+			new Address(2,"4420 Peach Drive. NE", "Unit 201", "Savannah","GA", 30010)
+			));
 	
-	@Transactional
-	public List<Address> getAllAddress(){
-		return repo.findAll();
+	public List<Address> getAllAddresses(){
+		return addresses;
 	}
 	
-	@Transactional
-	public Address getById(int id) {
-		return repo.getOne(id);
+	public Address getAddress(int id) {
+		return addresses.get(id-1);
 	}
 	
-	@Transactional
-	public boolean addAddress(Address a) {
-		return repo.save(a) !=null;
+	public void addAddress(Address a) {
+		addresses.add(a);
 	}
 	
-	@Transactional
-	public boolean updateAddress(Address a) {
-		return repo.save(a) != null;
+	public void updateAddress(int id, Address u) {
+		addresses.set(id-1, u);
 	}
 	
-	@Transactional
-	public void deleteAddress(int id) {
-		repo.deleteById(id);
+	public void removeAddress(int id) {
+		addresses.remove(id-1);
 	}
-
 }
