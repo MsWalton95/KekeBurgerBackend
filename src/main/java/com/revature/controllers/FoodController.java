@@ -1,7 +1,6 @@
 package com.revature.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,24 +22,19 @@ public class FoodController {
 	@Autowired
 	private FoodService fs;
 	
-	@GetMapping("/dummy")
-	public List<Food> dummy() {
-		return fs.dummyFood();
-	}
-	
 	@GetMapping
 	public List<Food> all() {
 		return fs.getAllFoods();
 	}
 	
-	@GetMapping("/{id}")
-	public Optional<Food> one(@PathVariable int id) {
-		return fs.getFood(id);
-	}
-	
 	@PostMapping
 	public void add(@RequestBody Food f) {
 		fs.addFood(f);
+	}
+	
+	@GetMapping("/{id}")
+	public Food one(@PathVariable int id) {
+		return fs.getFood(id);
 	}
 	
 	@PutMapping("/{id}")
@@ -51,5 +45,20 @@ public class FoodController {
 	@DeleteMapping("/{id}")
 	public void remove(@PathVariable int id) {
 		fs.removeFood(id);
+	}
+	
+	@GetMapping("/count")
+	public long count(){
+		return fs.countFood();
+	}
+	
+	@GetMapping("/name/{name}")
+	public Food name(@PathVariable String name) {
+		return fs.getName(name);
+	}
+
+	@GetMapping("/type/{type}")
+	public List<Food> type(@PathVariable String type){
+		return fs.getType(type);
 	}
 }

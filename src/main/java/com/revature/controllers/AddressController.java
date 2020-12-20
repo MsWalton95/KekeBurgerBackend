@@ -1,7 +1,6 @@
 package com.revature.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,24 +22,19 @@ public class AddressController {
 	@Autowired
 	private AddressService as;
 	
-	@GetMapping("/dummy")
-	public List<Address> dummy() {
-		return as.dummyAddresses();
-	}
-	
 	@GetMapping
 	public List<Address> all() {
 		return as.getAllAddresses();
 	}
 	
 	@GetMapping("/{id}")
-	public Optional<Address> one(@PathVariable int id) {
+	public Address one(@PathVariable int id) {
 		return as.getAddress(id);
 	}
 	
-	@PostMapping
-	public void add(@RequestBody Address a) {
-		as.addAddress(a);
+	@PostMapping("/{id}")
+	public void add(@PathVariable int id, @RequestBody Address a) {
+		as.addAddress(id, a);
 	}
 	
 	@PutMapping("/{id}")
@@ -52,4 +46,20 @@ public class AddressController {
 	public void remove(@PathVariable int id) {
 		as.removeAddress(id);
 	}
+	
+	@GetMapping("/city/{city}")
+	public long city(@PathVariable String city) {
+		return as.countCity(city);
+	}
+	
+	@GetMapping("/state/{state}")
+	public long state(@PathVariable String state) {
+		return as.countState(state);
+	}
+	
+	@GetMapping("/zipcode/{zipcode}")
+	public long zipcode(@PathVariable String zipcode) {
+		return as.countZipcode(zipcode);
+	}
+	
 }
