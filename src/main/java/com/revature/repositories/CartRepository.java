@@ -1,5 +1,7 @@
 package com.revature.repositories;
 
-public class CartRepository {
+import org.springframework.data.repository.CrudRepository;
 
-}
+import com.revature.models.Cart;
+
+public interface CartRepository extends CrudRepository<Cart, Integer> {}

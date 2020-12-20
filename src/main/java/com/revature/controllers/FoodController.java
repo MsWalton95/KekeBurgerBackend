@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,13 +23,18 @@ public class FoodController {
 	@Autowired
 	private FoodService fs;
 	
+	@GetMapping("/dummy")
+	public List<Food> dummy() {
+		return fs.dummyFood();
+	}
+	
 	@GetMapping
 	public List<Food> all() {
 		return fs.getAllFoods();
 	}
 	
 	@GetMapping("/{id}")
-	public Food one(@PathVariable int id) {
+	public Optional<Food> one(@PathVariable int id) {
 		return fs.getFood(id);
 	}
 	

@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,13 +23,18 @@ public class AddressController {
 	@Autowired
 	private AddressService as;
 	
+	@GetMapping("/dummy")
+	public List<Address> dummy() {
+		return as.dummyAddresses();
+	}
+	
 	@GetMapping
 	public List<Address> all() {
 		return as.getAllAddresses();
 	}
 	
 	@GetMapping("/{id}")
-	public Address one(@PathVariable int id) {
+	public Optional<Address> one(@PathVariable int id) {
 		return as.getAddress(id);
 	}
 	

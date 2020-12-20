@@ -1,5 +1,7 @@
 package com.revature.repositories;
 
-public class FoodRepository {
+import org.springframework.data.repository.CrudRepository;
 
-}
+import com.revature.models.Food;
+
+public interface FoodRepository extends CrudRepository<Food, Integer> {}

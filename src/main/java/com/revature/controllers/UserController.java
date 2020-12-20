@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,13 +23,19 @@ public class UserController {
 	@Autowired
 	private UserService us;
 
+	@GetMapping("/dummy")
+	public List<User> dummy() {
+		return us.dummyUsers();
+	}
+	
 	@GetMapping
 	public List<User> all() {
 		return us.getAllUsers();
 	}
 	
+	
 	@GetMapping("/{id}")
-	public User one(@PathVariable int id) {
+	public Optional<User> one(@PathVariable int id) {
 		return us.getUser(id);
 	}
 	

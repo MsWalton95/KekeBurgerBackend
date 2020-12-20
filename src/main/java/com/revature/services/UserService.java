@@ -3,37 +3,47 @@ package com.revature.services;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.models.User;
+import com.revature.repositories.UserRepository;
 
 @Service
 public class UserService {
-
-	private List<User> users = new ArrayList<>( Arrays.asList(
-			new User(1, "Keke","Watson","kewatson95@gmail.com", "9321237890"),
-			new User(2, "Bob", "Blecher", "boblecher79@gmail.com", "5071598462")
+	
+	@Autowired
+	private UserRepository ur;
+	
+	private List<User> foods = new ArrayList<>(Arrays.asList(
+			new User(1,"Keke","Watson","kewatson95@gmail.com","7326785430"),
+			new User(2,"Bob","Blecher","boblecher78@gmail.com","8085558080")
 			));
 	
-	public List<User> getAllUsers(){
-		return users;
+	public List<User> dummyUsers(){
+		return foods;
 	}
 	
-	public User getUser(int id) {
-		return users.get(id-1);
+	public List<User> getAllUsers(){
+		return (List<User>) ur.findAll();
+	}
+	
+	public Optional<User> getUser(int id) {
+		return ur.findById(id);
 	}
 	
 	public void addUser(User u) {
-		users.add(u);
+		ur.save(u);
 	}
 	
 	public void updateUser(int id, User u) {
-		users.set(id-1, u);
+		ur.save(u);
 	}
 	
 	public void removeUser(int id) {
-		users.remove(id-1);
+		ur.deleteById(id);
 	}
 	
 }
