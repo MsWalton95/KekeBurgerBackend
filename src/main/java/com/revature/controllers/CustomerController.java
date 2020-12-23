@@ -3,6 +3,7 @@ package com.revature.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.models.Customer;
 import com.revature.services.CustomerService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
@@ -27,14 +29,19 @@ public class CustomerController {
 		return cs.getAllCustomers();
 	}
 	
+	@PostMapping("/login")
+	public Customer login(@RequestBody Customer c) {
+		return cs.login(c.getEmail(), c.getPassword());
+	}
+	
 	@PutMapping("/{id}/add/{food}")
-	public void addOrder(@PathVariable int id, @PathVariable int id2) {
-		cs.addToOrder(id, id2);
+	public void addOrder(@PathVariable int id, @PathVariable int food) {
+		cs.addToOrder(id, food);
 	}
 	
 	@PutMapping("/{id}/remove/{food}")
-	public void removeOrder(@PathVariable int id, @PathVariable int id2) {
-		cs.removeFromOrder(id, id2);
+	public void removeOrder(@PathVariable int id, @PathVariable int food) {
+		cs.removeFromOrder(id, food);
 	}
 	
 	@PostMapping

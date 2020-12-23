@@ -12,9 +12,8 @@ public interface CustomerRepository extends CrudRepository<Customer, Integer> {
 	
 	public Customer findByEmail(String email);
 	
-	public List<Customer> findByPhoneNumber(String number);
+	public Customer findByEmailAndPassword(String email, String password);
 	
-//	Count the number of Food
-//	Count the number of Food by Name
+	public List<Customer> findByPhoneNumber(String number);
 
 }

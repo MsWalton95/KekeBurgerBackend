@@ -24,13 +24,15 @@ public class Customer implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(nullable=false)
+	@Column(nullable=false, length=20)
 	private String firstName;
-	@Column(nullable=false)
+	@Column(nullable=false, length=20)
 	private String lastName;
-	@Column(nullable=false, unique=true)
+	@Column(nullable=false, unique=true, length=30)
 	private String email;
-	@Column(nullable=false)
+	@Column(nullable=false, length=15)
+	private String password;
+	@Column(nullable=false, length=10)
 	private String phoneNumber;
 	
 	@ManyToMany
@@ -39,12 +41,19 @@ public class Customer implements Serializable{
                 inverseJoinColumns={@JoinColumn(name="food_id")})
 	private List<Food> food;
 	
-	public Customer(String firstName, String lastName, String email, String phoneNumber) {
+	public Customer(String firstName, String lastName, String email, String password, String phoneNumber) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.password = password;
 		this.phoneNumber = phoneNumber;
+	}
+
+	public Customer(String email, String password) {
+		super();
+		this.email = email;
+		this.password = password;
 	}
 	
 }

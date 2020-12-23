@@ -17,6 +17,10 @@ public class CustomerService {
 	@Autowired
 	private FoodRepository fr;
 	
+	public Customer login(String email, String password) {
+		return cr.findByEmailAndPassword(email, String.valueOf(password.hashCode()));
+	}
+	
 	public void addToOrder(int id1, int id2) {
 		Customer c = cr.findById(id1);
 		c.getFood().add(fr.findById(id2));
@@ -46,6 +50,7 @@ public class CustomerService {
 	}
 	
 	public void addCustomer(Customer c) {
+		c.setPassword(String.valueOf(c.getPassword().hashCode()));
 		cr.save(c);
 	}
 	

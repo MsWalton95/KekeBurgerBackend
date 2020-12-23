@@ -29,6 +29,9 @@ public class Food implements Serializable{
 	private String type;
 	@Column(nullable=false)
 	private int calories;
+	private String description;
+	@Column(unique=true)
+	private String image;
 	
 	public Food(String name, double price, String type, int calories) {
 		super();
@@ -37,6 +40,14 @@ public class Food implements Serializable{
 		this.type = type;
 		this.calories = calories;
 	}
-
 	
+	public Food(String name, double price, String type, int calories, String description, String image) {
+		super();
+		this.name = name;
+		this.price = price;
+		this.type = type;
+		this.calories = calories;
+		this.description = description;
+		this.image = image;
+	}
 }
