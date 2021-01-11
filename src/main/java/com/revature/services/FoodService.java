@@ -19,7 +19,7 @@ public class FoodService {
 	}
 	
 	public List<Food> getType(String type) {
-		return fr.findByType(type);
+		return fr.findByTypeOrderById(type);
 	}
 	
 	public long countFood(){

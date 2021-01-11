@@ -34,6 +34,11 @@ public class AddressController {
 		return as.getAddress(id);
 	}
 	
+	@GetMapping("/customer/{id}")
+	public List<Address> customer(@PathVariable int id){
+		return as.getByCustomerId(id);
+	}
+	
 	@PostMapping("/{id}")
 	public void add(@PathVariable int id, @RequestBody Address a) {
 		as.addAddress(id, a);

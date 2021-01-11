@@ -12,7 +12,7 @@ public interface FoodRepository extends CrudRepository<Food, Integer> {
 	
 	public Food findByName(String name);
 	
-	public List<Food> findByType(String type);
+	public List<Food> findByTypeOrderById(String type);
 	
 	public List<Food> countByName(String name);
 }

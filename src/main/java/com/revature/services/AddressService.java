@@ -26,6 +26,10 @@ public class AddressService {
 		return ar.findById(id);
 	}
 	
+	public List<Address> getByCustomerId(int id){
+		return ar.findByAndCustomerId(id);
+	}
+	
 	public void addAddress(int id, Address a) {
 		a.setCustomer(cr.findById(id));
 		ar.save(a);
