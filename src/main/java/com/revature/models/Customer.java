@@ -24,14 +24,19 @@ public class Customer implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
 	@Column(nullable=false, length=20)
 	private String firstName;
+	
 	@Column(nullable=false, length=20)
 	private String lastName;
+	
 	@Column(nullable=false, unique=true, length=30)
 	private String email;
+	
 	@Column(nullable=false, length=15)
 	private String password;
+	
 	@Column(nullable=false, length=10)
 	private String phoneNumber;
 	

@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.Customer;
+import com.revature.models.Food;
 import com.revature.services.CustomerService;
 
 @CrossOrigin
@@ -39,9 +41,39 @@ public class CustomerController {
 		cs.addToOrder(id, food);
 	}
 	
+	@PutMapping("/{id}/add/{food}/{quantity}")
+	public void addToOrder(@PathVariable int id, @PathVariable int food, @PathVariable int quantity) {
+		cs.addFood(id, food, quantity);
+	}
+	
 	@PutMapping("/{id}/remove/{food}")
 	public void removeOrder(@PathVariable int id, @PathVariable int food) {
 		cs.removeFromOrder(id, food);
+	}
+	
+	@PutMapping("/{id}/remove/{food}/{quantity}")
+	public void removeFromOrder(@PathVariable int id, @PathVariable int food, @PathVariable int quantity) {
+		cs.removeFood(id, food, quantity);
+	}
+	
+	@GetMapping("/{id}/clear")
+	public void clearCart(@PathVariable int id) {
+		cs.clearCart(id);
+	}
+	
+	@GetMapping("/{id}/count")
+	public int countFood(@PathVariable int id) {
+		return cs.countFood(id);
+	}
+	
+	@GetMapping("/{id}/food")
+	public Set<Food> setFood(@PathVariable int id) {
+		return cs.order(id);
+	}
+	
+	@GetMapping("/{id}/count/{food}")
+	public int quantity(@PathVariable int id, @PathVariable int food) {
+		return cs.quantity(id, food);
 	}
 	
 	@PostMapping
@@ -55,8 +87,8 @@ public class CustomerController {
 	}
 	
 	@PutMapping("/{id}")
-	public void update(@PathVariable int id, @RequestBody Customer u) {
-		cs.updateCustomer(id, u);
+	public void update(@PathVariable int id, @RequestBody Customer c) {
+		cs.updateCustomer(id, c);
 	}
 	
 	@DeleteMapping("/{id}")
