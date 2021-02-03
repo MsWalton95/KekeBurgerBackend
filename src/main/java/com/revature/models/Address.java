@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,6 +38,7 @@ public class Address implements Serializable{
 	@Column(nullable=false, length=5)
 	private String zipcode;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Customer customer;
 

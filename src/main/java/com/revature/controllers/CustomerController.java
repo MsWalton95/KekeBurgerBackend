@@ -4,15 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.revature.models.Customer;
 import com.revature.models.Food;
@@ -85,10 +77,28 @@ public class CustomerController {
 	public Customer one(@PathVariable int id) {
 		return cs.getCustomer(id);
 	}
+	@PatchMapping("/{id}/firstName")
+	public void updateFirstName(@PathVariable int id, @RequestBody Customer c) {
+		cs.updateFirstName(id, c.getFirstName());
+	}
+	@PatchMapping("/{id}/lastName")
+	public void updateLastName(@PathVariable int id, @RequestBody Customer c) {
+		cs.updateLastName(id, c.getLastName());
+	}
 	
-	@PutMapping("/{id}")
-	public void update(@PathVariable int id, @RequestBody Customer c) {
-		cs.updateCustomer(id, c);
+	@PatchMapping("/{id}/email")
+	public void updateEmail(@PathVariable int id, @RequestBody Customer c) {
+		cs.updateEmail(id, c.getEmail());
+	}
+	
+	@PatchMapping("/{id}/password")
+	public void updatePassword(@PathVariable int id, @RequestBody Customer c) {
+		cs.updatePassword(id, c.getPassword());
+	}
+	
+	@PatchMapping("/{id}/number")
+	public void updateNumber(@PathVariable int id, @RequestBody Customer c) {
+		cs.updateNumber(id, c.getPhoneNumber());
 	}
 	
 	@DeleteMapping("/{id}")
@@ -110,4 +120,5 @@ public class CustomerController {
 	public Customer email(@PathVariable String email) {
 		return cs.getEmail(email);
 	}
+	
 }

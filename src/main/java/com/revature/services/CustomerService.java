@@ -82,8 +82,33 @@ public class CustomerService {
 		cr.save(c);
 	}
 	
-	public void updateCustomer(int id, Customer c) {
-		c.setId(id);
+	public void updateFirstName(int id, String firstName) {
+		Customer c = cr.findById(id);
+		c.setFirstName(firstName);
+		cr.save(c);
+	}
+	
+	public void updateLastName(int id, String lastName) {
+		Customer c = cr.findById(id);
+		c.setLastName(lastName);
+		cr.save(c);
+	}
+	
+	public void updateEmail(int id, String email) {
+		Customer c = cr.findById(id);
+		c.setEmail(email);
+		cr.save(c);
+	}
+	
+	public void updatePassword(int id, String password) {
+		Customer c = cr.findById(id);
+		c.setPassword(String.valueOf(password.hashCode()));
+		cr.save(c);
+	}
+	
+	public void updateNumber(int id, String number) {
+		Customer c = cr.findById(id);
+		c.setPhoneNumber(number);
 		cr.save(c);
 	}
 	
