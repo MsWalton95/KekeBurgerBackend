@@ -10,7 +10,7 @@ import com.revature.models.Customer;
 import com.revature.models.Food;
 import com.revature.services.CustomerService;
 
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
@@ -77,28 +77,33 @@ public class CustomerController {
 	public Customer one(@PathVariable int id) {
 		return cs.getCustomer(id);
 	}
-	@PatchMapping("/{id}/firstName")
+	@PutMapping("/{id}/firstName")
 	public void updateFirstName(@PathVariable int id, @RequestBody Customer c) {
 		cs.updateFirstName(id, c.getFirstName());
 	}
-	@PatchMapping("/{id}/lastName")
+	@PutMapping("/{id}/lastName")
 	public void updateLastName(@PathVariable int id, @RequestBody Customer c) {
 		cs.updateLastName(id, c.getLastName());
 	}
 	
-	@PatchMapping("/{id}/email")
+	@PutMapping("/{id}/email")
 	public void updateEmail(@PathVariable int id, @RequestBody Customer c) {
 		cs.updateEmail(id, c.getEmail());
 	}
 	
-	@PatchMapping("/{id}/password")
+	@PutMapping("/{id}/password")
 	public void updatePassword(@PathVariable int id, @RequestBody Customer c) {
 		cs.updatePassword(id, c.getPassword());
 	}
 	
-	@PatchMapping("/{id}/number")
+	@PutMapping("/{id}/number")
 	public void updateNumber(@PathVariable int id, @RequestBody Customer c) {
 		cs.updateNumber(id, c.getPhoneNumber());
+	}
+	
+	@PutMapping("/{id}/primary/{primary}")
+	public void updateAddress(@PathVariable int id, @PathVariable int primary) {
+		cs.primaryAddress(id, primary);
 	}
 	
 	@DeleteMapping("/{id}")

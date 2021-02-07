@@ -8,8 +8,10 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.models.Address;
 import com.revature.models.Customer;
 import com.revature.models.Food;
+import com.revature.repositories.AddressRepository;
 import com.revature.repositories.CustomerRepository;
 import com.revature.repositories.FoodRepository;
 
@@ -21,6 +23,9 @@ public class CustomerService {
 	
 	@Autowired
 	private FoodRepository fr;
+	
+	@Autowired
+	private AddressRepository ar;
 	
 	public Customer login(String email, String password) {
 		return cr.findByEmailAndPassword(email, String.valueOf(password.hashCode()));
@@ -109,6 +114,13 @@ public class CustomerService {
 	public void updateNumber(int id, String number) {
 		Customer c = cr.findById(id);
 		c.setPhoneNumber(number);
+		cr.save(c);
+	}
+
+	public void primaryAddress(int id, int id2) {
+		Customer c = cr.findById(id);
+		Address a = ar.findById(id2);
+		c.setAddress(a);
 		cr.save(c);
 	}
 	

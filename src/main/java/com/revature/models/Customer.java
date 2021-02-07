@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -46,6 +47,9 @@ public class Customer implements Serializable{
                 inverseJoinColumns={@JoinColumn(name="food_id")})
 	private List<Food> food;
 	
+	@OneToOne
+	private Address address;
+	
 	public Customer(String firstName, String lastName, String email, String password, String phoneNumber) {
 		super();
 		this.firstName = firstName;
@@ -60,5 +64,9 @@ public class Customer implements Serializable{
 		this.email = email;
 		this.password = password;
 	}
+
+	public Customer(String update) {
+		super();
+	}	
 	
 }
