@@ -83,7 +83,14 @@ public class CustomerService {
 	}
 	
 	public void addCustomer(Customer c) {
+		c.setSubscribed(false);
 		c.setPassword(String.valueOf(c.getPassword().hashCode()));
+		cr.save(c);
+	}
+	
+	public void updateSub(int id, boolean sub) {
+		Customer c = cr.findById(id);
+		c.setSubscribed(sub);
 		cr.save(c);
 	}
 	

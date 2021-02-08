@@ -41,6 +41,9 @@ public class Customer implements Serializable{
 	@Column(nullable=false, length=10)
 	private String phoneNumber;
 	
+	@Column(nullable=true)
+	private boolean subscribed;
+	
 	@ManyToMany
     @JoinTable(name="Cart", 
                 joinColumns={@JoinColumn(name="customer_id")}, 
@@ -50,13 +53,14 @@ public class Customer implements Serializable{
 	@OneToOne
 	private Address address;
 	
-	public Customer(String firstName, String lastName, String email, String password, String phoneNumber) {
+	public Customer(String firstName, String lastName, String email, String password, String phoneNumber, boolean subscribed) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.phoneNumber = phoneNumber;
+		this.subscribed = subscribed;
 	}
 
 	public Customer(String email, String password) {

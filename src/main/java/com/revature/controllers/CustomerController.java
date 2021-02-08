@@ -77,10 +77,17 @@ public class CustomerController {
 	public Customer one(@PathVariable int id) {
 		return cs.getCustomer(id);
 	}
+	
+	@PutMapping("/{id}/subscribe")
+	public void updateSubscribe(@PathVariable int id, @RequestBody Customer c) {
+		cs.updateSub(id, c.isSubscribed());
+	}
+	
 	@PutMapping("/{id}/firstName")
 	public void updateFirstName(@PathVariable int id, @RequestBody Customer c) {
 		cs.updateFirstName(id, c.getFirstName());
 	}
+	
 	@PutMapping("/{id}/lastName")
 	public void updateLastName(@PathVariable int id, @RequestBody Customer c) {
 		cs.updateLastName(id, c.getLastName());

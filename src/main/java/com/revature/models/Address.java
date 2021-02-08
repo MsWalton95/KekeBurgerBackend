@@ -27,8 +27,6 @@ public class Address implements Serializable{
 	@Column(nullable=false)
 	private String address1;
 	
-	private String address2;
-	
 	@Column(nullable=false, length=20)
 	private String city;
 	
@@ -38,17 +36,38 @@ public class Address implements Serializable{
 	@Column(nullable=false, length=5)
 	private String zipcode;
 	
+	private double lat;
+	private double lng;
+	
 	@JsonIgnore
 	@ManyToOne
 	private Customer customer;
 
-	public Address(String address1, String address2, String city, String state, String zipcode) {
+	public Address(String address1, String city, String state, String zipcode) {
 		super();
 		this.address1 = address1;
-		this.address2 = address2;
 		this.city = city;
 		this.state = state;
 		this.zipcode = zipcode;
+	}
+
+	public Address(int id, String address1, String city, String state, String zipcode) {
+		super();
+		this.id = id;
+		this.address1 = address1;
+		this.city = city;
+		this.state = state;
+		this.zipcode = zipcode;
+	}
+
+	public Address(String address1, String city, String state, String zipcode, double lat, double lng) {
+		super();
+		this.address1 = address1;
+		this.city = city;
+		this.state = state;
+		this.zipcode = zipcode;
+		this.lat = lat;
+		this.lng = lng;
 	}
 	
 }

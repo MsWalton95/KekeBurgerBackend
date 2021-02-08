@@ -32,6 +32,9 @@ public class AddressService {
 	
 	public void addAddress(int id, Address a) {
 		a.setCustomer(cr.findById(id));
+		if(a.getCustomer().getAddress() == null) {
+			a.getCustomer().setAddress(a);
+		}
 		ar.save(a);
 	}
 	
@@ -41,7 +44,13 @@ public class AddressService {
 	}
 	
 	public void removeAddress(int id) {
-		ar.deleteById(id);
+		Address a = ar.findById(id);
+		if(a == a.getCustomer().getAddress()) {
+			a.getCustomer().setAddress(null);
+			ar.deleteById(id);
+		} else {
+			ar.deleteById(id);
+		}
 	}
 	
 	public long countCity(String city) {
